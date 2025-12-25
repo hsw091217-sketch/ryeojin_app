@@ -1,6 +1,19 @@
 import streamlit as st
 from datetime import datetime
 import os
+
+FILES = [
+    "users.txt",
+    "posts.txt",
+    "admin_requests.txt",
+    "artist_requests.txt",
+    "archive/data.txt"
+]
+
+for file in FILES:
+    os.makedirs(os.path.dirname(file), exist_ok=True) if "/" in file else None
+    if not os.path.exists(file):
+        open(file, "w", encoding="utf-8").close()
 import hashlib
 
 # =========================
@@ -354,4 +367,5 @@ else:
         st.session_state.logged_in = False
         st.session_state.username = ""
         st.session_state.user_type = None
+
         st.experimental_rerun()
